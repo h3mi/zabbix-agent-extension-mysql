@@ -35,6 +35,7 @@ Zabbix options:
                                 [default: 127.0.0.1].
   -p --port <port>            Port of zabbix server [default: 10051].
   --zabbix-prefix <prefix>    Add part of your prefix for key [default: None].
+  --hostname                  server hostname as defined in zabbix
 
 MySQL options:
   -n --network <net>          Network type unix or tcp [default: tcp].
@@ -67,11 +68,7 @@ Misc options:
 		zabbixPrefix = fmt.Sprintf("%s.%s", zabbixPrefix, "mysql")
 	}
 
-	hostname, err := os.Hostname()
-	if err != nil {
-		fmt.Println(err.Error())
-		os.Exit(1)
-	}
+	hostname := args["--hostname"].(string)
 
 	network := args["--network"].(string)
 
